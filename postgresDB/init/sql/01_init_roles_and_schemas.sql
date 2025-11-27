@@ -1,9 +1,9 @@
 -- Create schemas and users. Run as superuser (the docker entrypoint does this automatically).
 -- Passwords are placeholders for local dev; change them before using in any shared environment.
 
-CREATE SCHEMA IF NOT EXISTS land AUTHORIZATION postgres;
-CREATE SCHEMA IF NOT EXISTS stage AUTHORIZATION postgres;
-CREATE SCHEMA IF NOT EXISTS prod AUTHORIZATION postgres;
+CREATE SCHEMA IF NOT EXISTS land AUTHORIZATION superuser;
+CREATE SCHEMA IF NOT EXISTS stage AUTHORIZATION superuser;
+CREATE SCHEMA IF NOT EXISTS prod AUTHORIZATION superuser;
 
 -- Create users (roles WITH LOGIN)
 -- NOTE: replace passwords in production/use secrets.

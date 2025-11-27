@@ -17,13 +17,8 @@ Quick start:
 
    The first time Postgres starts it will execute the SQL files in `init/sql` to create schemas, users, tables, and grants.
 
-2. Rebuild or re-run init SQL (after container is up):
-   ./scripts/rebuild.sh
-
-   This runs the SQL scripts in order against the running container. Adjust connection settings in the script if needed.
-
 Credentials (local dev):
-- Superuser: postgres / postgres (configured in docker-compose.yml)
+- Superuser: superuser / superuser (configured in docker-compose.yml)
 - db_owner: db_owner / owner_pass
 - db_user: db_user / user_pass
 - db_load: db_load / load_pass
