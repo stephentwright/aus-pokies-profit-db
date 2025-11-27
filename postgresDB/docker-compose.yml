@@ -5,8 +5,8 @@ services:
     container_name: aus_pokies_db
     environment:
       POSTGRES_DB: aus_pokies
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: superuser
+      POSTGRES_PASSWORD: superuser
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./init/sql:/docker-entrypoint-initdb.d:ro
@@ -17,7 +17,7 @@ services:
     image: dpage/pgadmin4:latest
     container_name: aus_pokies_pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_EMAIL: stephen@datarecipes.info
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
