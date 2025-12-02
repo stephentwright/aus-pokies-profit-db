@@ -190,9 +190,9 @@ def build_metadata():
         except Exception as e:
             # Extract entity type from filename even on error
             if 'clubs' in fname.lower():
-                entity_type = 'clubs'
+                entity_type = 'club'
             elif 'hotels' in fname.lower():
-                entity_type = 'hotels'
+                entity_type = 'hotel'
             else:
                 entity_type = 'unknown'
             
