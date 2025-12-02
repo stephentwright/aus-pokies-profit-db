@@ -13,11 +13,11 @@ GRANT USAGE ON SCHEMA prod TO db_user, db_owner, db_external;
 -- 2) LAND: db_load: INSERT/UPDATE/DELETE/SELECT; db_user: SELECT; db_owner: ALL
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA land TO db_owner;
 GRANT SELECT ON ALL TABLES IN SCHEMA land TO db_user;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA land TO db_load;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA land TO db_load;
 
 -- 3) STAGE: db_user read/write, db_owner all
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA stage TO db_owner;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA stage TO db_user;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA stage TO db_user;
 
 -- 4) PROD: db_user and db_external read only, db_owner all
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA prod TO db_owner;
@@ -34,13 +34,30 @@ GRANT CREATE ON SCHEMA prod TO db_owner;
 -- Note: this statement must be run as the role that will own the tables (db_owner). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_owner:
 SET ROLE db_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT SELECT ON TABLES TO db_user;
-ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO db_load;
+ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_load;
 ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_owner;
 
-ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO db_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT ALL ON TABLES TO db_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT ALL ON TABLES TO db_owner;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA prod GRANT SELECT ON TABLES TO db_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA prod GRANT SELECT ON TABLES TO db_external;
 ALTER DEFAULT PRIVILEGES IN SCHEMA prod GRANT ALL ON TABLES TO db_owner;
+RESET ROLE;
+
+-- 7) Default privileges for future tables created by db_land
+-- This makes it so when db_owner creates new tables, these grants are applied automatically.
+-- Note: this statement must be run as the role that will own the tables (db_owner). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_owner:
+SET ROLE db_land;
+ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT SELECT ON TABLES TO db_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_load;
+ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_owner;
+RESET ROLE;
+
+-- 8) Default privileges for future tables created by db_user
+-- This makes it so when db_owner creates new tables, these grants are applied automatically.
+-- Note: this statement must be run as the role that will own the tables (db_owner). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_owner:
+SET ROLE db_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT ALL ON TABLES TO db_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT ALL ON TABLES TO db_owner;
 RESET ROLE;
