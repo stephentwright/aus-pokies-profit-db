@@ -45,10 +45,10 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA prod GRANT SELECT ON TABLES TO db_external;
 ALTER DEFAULT PRIVILEGES IN SCHEMA prod GRANT ALL ON TABLES TO db_owner;
 RESET ROLE;
 
--- 7) Default privileges for future tables created by db_land
+-- 7) Default privileges for future tables created by db_load
 -- This makes it so when db_owner creates new tables, these grants are applied automatically.
--- Note: this statement must be run as the role that will own the tables (db_owner). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_owner:
-SET ROLE db_land;
+-- Note: this statement must be run as the role that will own the tables (db_load). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_load:
+SET ROLE db_load;
 ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT SELECT ON TABLES TO db_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_load;
 ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_owner;
