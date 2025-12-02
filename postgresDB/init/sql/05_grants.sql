@@ -55,8 +55,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA land GRANT ALL ON TABLES TO db_owner;
 RESET ROLE;
 
 -- 8) Default privileges for future tables created by db_user
--- This makes it so when db_owner creates new tables, these grants are applied automatically.
--- Note: this statement must be run as the role that will own the tables (db_owner). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_owner:
+-- This makes it so when db_user creates new tables, these grants are applied automatically.
+-- Note: this statement must be run as the role that will own the tables (db_user). Since this file runs as postgres superuser at init time, we'll set defaults for objects created by db_user:
 SET ROLE db_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT ALL ON TABLES TO db_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA stage GRANT ALL ON TABLES TO db_owner;
