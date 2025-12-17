@@ -52,7 +52,7 @@ URLS = [
     "https://www.nsw.gov.au/sites/default/files/noindex/2025-07/hotels-gaming-machine-report-by-lga-1-jul-2018-to-31-dec-2018.XLSX",
     "https://www.nsw.gov.au/sites/default/files/noindex/2025-07/new_hotels-gaming-machine-bi-annual-report-by-lga-jun-2018-1.xlsx",
     "https://www.nsw.gov.au/sites/default/files/noindex/2025-07/hotels-gaming-machine-report-by-lga-1-july-2017-to-31-december-2017.xlsx",
-    "https://www.nsw.gov.au/sites/default/files/noindex/2025-07/clubs-gaming-machine-report-by-lga-1-december-2016-to-31-may-2017.xlsx"
+    "https://www.nsw.gov.au/sites/default/files/noindex/2025-07/hotels-gaming-machine-report-by-lga-1-january-2017-to-30-june-2017.xlsx"
 ]
 
 def download_file(url):
